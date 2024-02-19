@@ -4,7 +4,7 @@ class Activeforce::Base
       @client = client
       @filters = {}
       @target = target
-      @soql = ''
+      @soql = ""
     end
 
     def to_restforce_collection
@@ -29,14 +29,14 @@ class Activeforce::Base
 
       where_clause =
         if conditions.empty?
-          ''
+          ""
         else
           conditions.prepend(" WHERE ")
         end
 
       @collection = nil
       @soql = "SELECT #{@target.read_fields.join(", ")} FROM #{@target.read_table_name} #{where_clause}"
-
+      puts @soql # Right before "self" at the end of the `where` method
       self
     end
 
@@ -44,26 +44,32 @@ class Activeforce::Base
       @collection ||= @client.query(@soql)
     end
 
-    def method_missing(meth, *args, &block)
-      collection.send(meth, *args, &block)
+    def method_missing(meth, *, &block)
+      collection.send(meth, *, &block)
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      collection.respond_to?(method_name, include_private)
     end
   end
 
   class << self
     def all
-      Relation.new(client, target: self).where({})
+      Relation.new(client, target: self).where
     end
 
-    def where(*_, **kwargs)
-      Relation.new(client, target: self).where(kwargs)
+    def where(**)
+      Relation.new(client, target: self).where(**)
     end
 
-    def find_by(*_, **kwargs)
-      where(*_, **kwargs)&.first
+    def find_by(**)
+      where(**)&.first
     end
 
-    def find_by!(*_, **kwargs)
-      raise Activeforce::RecordNotFound unless record = where(*_, **kwargs)&.first
+    def find_by!(**)
+      unless (record = where(**)&.first)
+        raise Activeforce::RecordNotFound
+      end
       record
     end
 
@@ -83,7 +89,6 @@ class Activeforce::Base
       @@table_name
     end
 
-
     protected
 
     def configuration
@@ -94,7 +99,7 @@ class Activeforce::Base
         client_id: Activeforce.client_id,
         client_secret: Activeforce.client_secret,
         security_token: Activeforce.security_token,
-        instance_url: Activeforce.instance_url,
+        instance_url: Activeforce.instance_url
       }
     end
 

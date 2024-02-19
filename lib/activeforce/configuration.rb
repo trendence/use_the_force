@@ -1,19 +1,18 @@
 module Configuration
-
   def configuration
     yield self
   end
 
   def define_configurables(*names, default: nil)
     names.each do |name|
-      class_variable_set("@@#{name}", default)
+      class_variable_set(:"@@#{name}", default)
 
       define_class_method "#{name}=" do |value|
-        class_variable_set("@@#{name}", value)
+        class_variable_set(:"@@#{name}", value)
       end
 
       define_class_method name do
-        class_variable_get("@@#{name}")
+        class_variable_get(:"@@#{name}")
       end
     end
   end
@@ -25,5 +24,4 @@ module Configuration
       define_method name, &block
     end
   end
-
 end
