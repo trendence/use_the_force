@@ -46,7 +46,7 @@ Lookup records in a similar fashion like `ActiveRecord`, for example,
 you can use `find_by`:
 
 ```ruby
-user = Salesforce::User.find_by(Email: "guybrush.threepwood@absolventa.de")
+user = Salesforce::User.find_by(Email: "guybrush.threepwood@trendence.de")
 user.Name # Guybrush Threepwood
 ```
 

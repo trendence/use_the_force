@@ -36,7 +36,7 @@ class Activeforce::Base
 
       @collection = nil
       @soql = "SELECT #{@target.read_fields.join(", ")} FROM #{@target.read_table_name} #{where_clause}"
-      puts @soql # Right before "self" at the end of the `where` method
+      collection # Right before "self" at the end of the `where` method
       self
     end
 
