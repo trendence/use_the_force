@@ -40,9 +40,8 @@ class Activeforce::Base
       self
     end
 
-
-    def find(table, id)
-      client.find(table, id)
+    def find(id)
+      @client.find(@target.read_table_name, id)
     end
 
     def collection
@@ -67,10 +66,17 @@ class Activeforce::Base
       Relation.new(client, target: self).where(**)
     end
 
-    def find(table, id)
-      Relation.new(client, target: self).find(table, id)
+    def find(id)
+      Relation.new(client, target: self).find(id)
     end
-    
+
+    def find!(id)
+      unless (record = find(id))
+        raise Activeforce::RecordNotFound
+      end
+      record
+    end
+
     def find_by(**)
       where(**)&.first
     end
