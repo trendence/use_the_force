@@ -3,45 +3,55 @@ require "activeforce/base"
 
 RSpec.describe Activeforce::Base do
   describe Activeforce::Base::Relation do
-    describe "#where" do
-      let(:client) { instance_double("Restforce::Client") }
-      let(:target_class) do
-        Class.new do
-          def self.read_fields
-            [:Id, :Name, :Custom_Field__c]
-          end
+    let(:client) { instance_double("Restforce::Client", query: []) }
 
-          def self.read_table_name
-            "CustomObject__c"
-          end
-        end
+    # Create a dummy subclass for testing
+    before(:all) do
+      class SalesforceModel < Activeforce::Base
+        fields :Id, :Name, :Custom_Field__c
+        table_name "CustomObject__c"
       end
+    end
 
+    before do
+      allow(Activeforce::Base).to receive(:client).and_return(client)
+      allow(client).to receive(:query).and_return([])
+    end
+
+    describe ".where" do
       it "builds correct SOQL query with string conditions" do
-        relation = described_class.new(client, target: target_class).where(Name: "Example")
-        expect(relation.instance_variable_get(:@soql)).to eq("SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Name = 'Example'")
+        expected_query = "SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Name = 'Example'"
+        SalesforceModel.where(Name: "Example")
+        expect(client).to have_received(:query).with(expected_query)
       end
 
       it "builds correct SOQL query with multiple conditions" do
-        relation = described_class.new(client, target: target_class).where(Name: "Example", Custom_Field__c: 123.45)
-        expect(relation.instance_variable_get(:@soql)).to eq("SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Name = 'Example' AND Custom_Field__c = 123.45")
+        expected_query = "SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Name = 'Example' AND Custom_Field__c = 123.45"
+        SalesforceModel.where(Name: "Example", Custom_Field__c: 123.45)
+        expect(client).to have_received(:query).with(expected_query)
       end
 
       it "handles boolean conditions correctly" do
-        relation = described_class.new(client, target: target_class).where(Active__c: true)
-        expect(relation.instance_variable_get(:@soql)).to eq("SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Active__c = true")
+        expected_query = "SELECT Id, Name, Custom_Field__c FROM CustomObject__c  WHERE Active__c = true"
+        SalesforceModel.where(Active__c: true)
+        expect(client).to have_received(:query).with(expected_query)
       end
     end
+    after(:all) { Object.send(:remove_const, :SalesforceModel) }
   end
+
+  # Cleanup to remove the dummy class after tests run
 
   describe ".all" do
     before do
       Activeforce::Base.table_name("CustomObject__c")
       Activeforce::Base.fields(:Id, :Name)
+      mock_client = instance_double("Restforce::Client", query: [])
+      allow(Activeforce::Base).to receive(:client).and_return(mock_client)
+      allow(mock_client).to receive(:query).with("SELECT Id, Name FROM CustomObject__c ").and_return([])
     end
-
+  
     it "returns a Relation instance representing all records" do
-      allow_any_instance_of(Activeforce::Base::Relation).to receive(:query).and_return([])
       result = Activeforce::Base.all
       expect(result).to be_a(Activeforce::Base::Relation)
     end

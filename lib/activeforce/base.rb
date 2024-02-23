@@ -40,6 +40,11 @@ class Activeforce::Base
       self
     end
 
+
+    def find(table, id)
+      client.find(table.to_s, id.to_s)
+    end
+
     def collection
       @collection ||= @client.query(@soql)
     end
@@ -62,6 +67,10 @@ class Activeforce::Base
       Relation.new(client, target: self).where(**)
     end
 
+    def find(table, id)
+      Relation.new(client, target: self).find(table, id)
+    end
+    
     def find_by(**)
       where(**)&.first
     end
