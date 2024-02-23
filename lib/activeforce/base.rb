@@ -42,7 +42,7 @@ class Activeforce::Base
 
 
     def find(table, id)
-      client.find(table.to_s, id.to_s)
+      client.find(table, id)
     end
 
     def collection
@@ -97,8 +97,6 @@ class Activeforce::Base
     def read_table_name
       @@table_name
     end
-
-    protected
 
     def configuration
       {
