@@ -11,6 +11,14 @@ class Activeforce::Base
       collection
     end
 
+    def create(**attributes)
+      client.create(@target.read_table_name, **attributes)
+    end
+
+    def update(id, **attributes)
+      client.update(@target.read_table_name, Id: id, **attributes)
+    end
+
     def where(**other_filters)
       @filters.merge!(other_filters) unless other_filters.empty?
 
@@ -58,6 +66,14 @@ class Activeforce::Base
   end
 
   class << self
+    def create(attributes)
+      Relation.new(client, target: self).create(attributes)
+    end
+
+    def update(id, attributes)
+      Relation.new(client, target: self).create(id, attributes)
+    end
+
     def all
       Relation.new(client, target: self).where
     end
