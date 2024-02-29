@@ -66,12 +66,12 @@ class Activeforce::Base
   end
 
   class << self
-    def create(attributes)
-      Relation.new(client, target: self).create(attributes)
+    def create(**attributes)
+      Relation.new(client, target: self).create(**attributes)
     end
 
-    def update(id, attributes)
-      Relation.new(client, target: self).create(id, attributes)
+    def update(id, **attributes)
+      Relation.new(client, target: self).update(id, **attributes)
     end
 
     def all
