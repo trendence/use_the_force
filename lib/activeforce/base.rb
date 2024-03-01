@@ -11,14 +11,16 @@ class Activeforce::Base
       collection
     end
 
-    def poop
-      puts @target.read_table_name
-      puts client.inspect
-      print client.create("Contact", :FirstName=>"zzzZzz")
+    def create(**attributes)
+      @client.create(@target.read_table_name, **attributes)
     end
 
     def update(id, **attributes)
-      client.update(@target.read_table_name, Id: id, **attributes)
+      @client.update(@target.read_table_name, Id: id, **attributes)
+    end
+
+    def destroy(id)
+      @client.destroy(@target.read_table_name, id)
     end
 
     def where(**other_filters)
@@ -74,6 +76,10 @@ class Activeforce::Base
 
     def update(id, **attributes)
       Relation.new(client, target: self).update(id, **attributes)
+    end
+
+    def destroy(id)
+      Relation.new(client, target: self).destroy(id)
     end
 
     def all
@@ -143,7 +149,3 @@ class Activeforce::Base
     raise NotImplementedError
   end
 end
-
-
-client = Activeforce::Base.client
-relation = Activeforce::Base::Relation.new(client, target: Salesforce::Contact)
