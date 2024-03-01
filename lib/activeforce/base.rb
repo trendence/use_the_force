@@ -11,8 +11,10 @@ class Activeforce::Base
       collection
     end
 
-    def create(**attributes)
-      client.create(@target.read_table_name, **attributes)
+    def poop
+      puts @target.read_table_name
+      puts client.inspect
+      print client.create("Contact", :FirstName=>"zzzZzz")
     end
 
     def update(id, **attributes)
@@ -141,3 +143,7 @@ class Activeforce::Base
     raise NotImplementedError
   end
 end
+
+
+client = Activeforce::Base.client
+relation = Activeforce::Base::Relation.new(client, target: Salesforce::Contact)

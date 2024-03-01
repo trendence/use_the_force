@@ -11,4 +11,4 @@ gem "rspec", "~> 3.2"
 
 gem "standard", "~> 1.3"
 
-gem "restforce", "~> 7.3.0"
+gem "restforce", path: "../restforce/restforce"
