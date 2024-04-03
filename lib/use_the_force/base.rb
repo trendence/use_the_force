@@ -60,8 +60,8 @@ class UseTheForce::Base
       @collection ||= @client.query(@soql)
     end
 
-    def method_missing(meth, *, &block)
-      collection.send(meth, *, &block)
+    def method_missing(meth, *, &)
+      collection.send(meth, *, &)
     end
 
     def respond_to_missing?(method_name, include_private = false)
