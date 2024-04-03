@@ -1,5 +1,4 @@
-# Activeforce
-
+# UseTheForce
 Ruby wrapper to mimick parts of ActiveRecord query interface to obtain
 data conveniently (and human friendly 😅) from Salesforce RESTful API.
 
@@ -8,7 +7,7 @@ data conveniently (and human friendly 😅) from Salesforce RESTful API.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activeforce'
+gem 'use_the_force'
 ```
 
 And then execute:
@@ -17,13 +16,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install activeforce
+    $ gem install use_the_force
 
 ## Usage
 
 Put your authentication credentials in an initializer:
 ```ruby
-Activeforce.configuration do |config|
+UseTheForce.configuration do |config|
   config.username = ENV["SALESFORCE_USERNAME"]
   config.pw = ENV["SALESFORCE_PW"]
   config.api_version = ENV["SALESFORCE_API_VERSION"]
@@ -36,7 +35,7 @@ end
 
 Define your Salesforce models:
 ```ruby
-class Salesforce::User < Activeforce::Base
+class Salesforce::User < UseTheForce::Base
   fields :Email, :Name, :IsPirate__c
   table_name :User__c
 end

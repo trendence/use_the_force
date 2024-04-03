@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in activeforce.gemspec
+# Specify your gem's dependencies in use_the_force.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

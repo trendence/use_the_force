@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    activeforce (0.1.0)
+   use_the_force (0.1.0)
       rake (~> 13.0)
       restforce (~> 7.3.0)
       rspec (~> 3.2)
@@ -96,7 +96,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activeforce!
+  use_the_force!
   rake (~> 13.0)
   restforce (~> 7.3.0)
   rspec (~> 3.2)

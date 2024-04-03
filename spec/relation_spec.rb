@@ -1,9 +1,9 @@
 require "spec_helper"
-require "activeforce/base"
+require "use_the_force/base"
 
-RSpec.describe Activeforce::Base::Relation do
+RSpec.describe UseTheForce::Base::Relation do
   before do
-    stub_const("SalesforceModel", Class.new(Activeforce::Base) do
+    stub_const("SalesforceModel", Class.new(UseTheForce::Base) do
       fields :Id, :Name, :Custom_Field__c
       table_name "CustomObject__c"
     end)
@@ -12,7 +12,7 @@ RSpec.describe Activeforce::Base::Relation do
   let(:client) { instance_double("Restforce::Client", query: []) }
 
   before do
-    allow(Activeforce::Base).to receive(:client).and_return(client)
+    allow(UseTheForce::Base).to receive(:client).and_return(client)
     allow(client).to receive(:query).and_return([])
   end
 

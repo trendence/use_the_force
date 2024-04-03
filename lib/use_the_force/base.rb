@@ -1,4 +1,4 @@
-class Activeforce::Base
+class UseTheForce::Base
   class Relation
     def initialize(client, target:)
       @client = client
@@ -96,7 +96,7 @@ class Activeforce::Base
 
     def find!(id)
       unless (record = find(id))
-        raise Activeforce::RecordNotFound
+        raise UseTheForce::RecordNotFound
       end
       record
     end
@@ -107,7 +107,7 @@ class Activeforce::Base
 
     def find_by!(**)
       unless (record = where(**)&.first)
-        raise Activeforce::RecordNotFound
+        raise UseTheForce::RecordNotFound
       end
       record
     end
@@ -130,13 +130,13 @@ class Activeforce::Base
 
     def configuration
       {
-        username: Activeforce.username,
-        password: Activeforce.pw,
-        api_version: Activeforce.api_version,
-        client_id: Activeforce.client_id,
-        client_secret: Activeforce.client_secret,
-        security_token: Activeforce.security_token,
-        instance_url: Activeforce.instance_url
+        username: UseTheForce.username,
+        password: UseTheForce.pw,
+        api_version: UseTheForce.api_version,
+        client_id: UseTheForce.client_id,
+        client_secret: UseTheForce.client_secret,
+        security_token: UseTheForce.security_token,
+        instance_url: UseTheForce.instance_url
       }
     end
 

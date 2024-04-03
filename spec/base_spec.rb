@@ -1,7 +1,7 @@
 require "spec_helper"
-require "activeforce/base"
+require "use_the_force/base"
 
-RSpec.describe Activeforce::Base do
+RSpec.describe UseTheForce::Base do
   let(:client) { instance_double("Restforce::Client", query: [], find: nil) }
 
   before do
@@ -69,7 +69,7 @@ RSpec.describe Activeforce::Base do
   describe ".find_by!" do
     it "raises RecordNotFound if no record is found" do
       allow(client).to receive(:query).and_return([])
-      expect { described_class.find_by!(Id: "nonexistent") }.to raise_error(Activeforce::RecordNotFound)
+      expect { described_class.find_by!(Id: "nonexistent") }.to raise_error(UseTheForce::RecordNotFound)
     end
   end
 
