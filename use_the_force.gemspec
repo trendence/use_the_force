@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/activeforce/version"
+require_relative "lib/use_the_force/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "activeforce"
-  spec.version = Activeforce::VERSION
+  spec.name = "use_the_force"
+  spec.version = UseTheForce::VERSION
   spec.authors = ["IvanSchlagheck", "rstammer"]
   spec.email = ["ivansch05@gmail.com", "robin.stammer@trendence.com"]
 
   spec.summary = "Ruby wrapper to mimick parts of ActiveRecord query interface to obtain data conveniently (and human friendly 😅) from Salesforce RESTful API."
-  spec.homepage = "https://github.com/trendence/activeforce"
+  spec.homepage = "https://github.com/trendence/use_the_force"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/trendence/activeforce"
-  spec.metadata["changelog_uri"] = "https://github.com/trendence/activeforce/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/trendence/use_the_force"
+  spec.metadata["changelog_uri"] = "https://github.com/trendence/use_the_force/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

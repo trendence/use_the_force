@@ -1,9 +1,9 @@
-require "activeforce/version"
-require "activeforce/base"
-require "activeforce/configuration"
+require "use_the_force/version"
+require "use_the_force/base"
+require "use_the_force/configuration"
 require "restforce"
 
-module Activeforce
+module UseTheForce
   extend Configuration
 
   class RecordNotFound < StandardError
