@@ -12,3 +12,5 @@ gem "rspec", "~> 3.2"
 gem "standard", "~> 1.3"
 
 gem "restforce", "~> 7.5.0"
+
+gem 'faraday', '2.10.0'
