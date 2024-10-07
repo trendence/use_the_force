@@ -7,3 +7,7 @@
 ## [0.1.1] - 2024-10-07
 
 - Modified Faraday version
+
+## [0.1.2] - 2024-10-07
+
+- Updated dependencies
