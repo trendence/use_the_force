@@ -4,7 +4,7 @@ class UseTheForce::Base
       @client = client
       @filters = {}
       @target = target
-      @soql = "" 
+      @soql = ""
     end
 
     def to_restforce_collection
