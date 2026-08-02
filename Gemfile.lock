@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    use_the_force (0.1.5)
+    use_the_force (0.1.6)
       faraday (~> 2.10)
       rake (~> 13.0)
       restforce (~> 8.0)
