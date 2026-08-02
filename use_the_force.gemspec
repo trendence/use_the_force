@@ -36,6 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rake", "~> 13.0"
   spec.add_dependency "rspec", "~> 3.2"
   spec.add_dependency "standard", "~> 1.3"
-  spec.add_dependency "restforce", "~> 7.5.0"
-  spec.add_dependency "faraday", "~> 2.10.0"
+  spec.add_dependency "restforce", "~> 8.0"
+  spec.add_dependency "faraday", "~> 2.10"
 end
